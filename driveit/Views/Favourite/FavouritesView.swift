@@ -25,7 +25,7 @@ struct FavouritesView: View {
                             CarItemView(car: car)
                         }
                     } else {
-                        Text("No data   :(")
+                        Text("Nothing to show")
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.gray)
                             .padding(.bottom, 5)
