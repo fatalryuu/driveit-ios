@@ -36,6 +36,7 @@ struct CarsListView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
+                .padding(.bottom, 100)
             }
             .background(Color.black.opacity(0.95))
             .ignoresSafeArea(.all)
