@@ -30,6 +30,7 @@ struct InputView: View {
                 .frame(width: 0.8 * UIScreen.main.bounds.width)
                 .foregroundColor(.white)
                 .textInputAutocapitalization(.never)
+                .autocorrectionDisabled(true)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(.white, lineWidth: 2))
