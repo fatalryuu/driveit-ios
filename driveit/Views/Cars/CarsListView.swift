@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CarsListView: View {
     @State var cars: [CarInfo] = []
+    @State private var search: String = ""
     
     var body: some View {
         NavigationView {
@@ -17,10 +18,20 @@ struct CarsListView: View {
                     Text("Cars list")
                         .font(.system(size: 42, weight: .bold))
                         .foregroundColor(.white)
-                        .padding(.bottom, 24)
                         .padding(.top, 64)
                     
-                    ForEach(cars) { car in
+                    TextField("", text: $search, prompt: Text("Search...").foregroundColor(.white))
+                        .padding(10)
+                        .font(.system(size: 18))
+                        .frame(width: 0.9 * UIScreen.main.bounds.width)
+                        .foregroundColor(.white)
+                        .textInputAutocapitalization(.never)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(.white, lineWidth: 2))
+                        .padding(.bottom, 24)
+                    
+                    ForEach(getFilteredCars(cars: cars)) { car in
                         CarItemView(car: car)
                     }
                 }
@@ -35,6 +46,17 @@ struct CarsListView: View {
                     }
                 }
             }
+        }
+    }
+    
+    func getFilteredCars(cars: [CarInfo]) -> [CarInfo] {
+        guard !search.isEmpty else {
+            
+            return cars
+        }
+        
+        return cars.filter { car in
+            car.name.lowercased().contains(search.lowercased())
         }
     }
 }

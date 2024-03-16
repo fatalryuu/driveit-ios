@@ -1,5 +1,5 @@
 //
-//  FavouriteView.swift
+//  FavouritesView.swift
 //  driveit
 //
 //  Created by Ivan Shatko on 17.02.24.
