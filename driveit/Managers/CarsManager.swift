@@ -40,13 +40,17 @@ class CarsManager {
     func getFavourites() async throws -> [CarInfo] {
         var favourites: [CarInfo] = []
         let userAuth = AuthManager.shared.getAuthenticatedUser()
-        let userInfo = try await UsersManager.shared.getUser(id: userAuth!.id)
-        
-        for favourite in userInfo!.favourites {
-            favourites.append(try await favourite.getDocument().data(as: CarInfo.self))
+        if userAuth != nil {
+            let userInfo = try await UsersManager.shared.getUser(id: userAuth!.id)
+            
+            for favourite in userInfo!.favourites {
+                favourites.append(try await favourite.getDocument().data(as: CarInfo.self))
+            }
+            
+            return favourites
         }
         
-        return favourites
+        return []
     }
     
     func isCarFavourite(id: String) async throws -> Bool {
